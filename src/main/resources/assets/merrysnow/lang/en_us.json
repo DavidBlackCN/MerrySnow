@@ -34,5 +34,9 @@
   "config.merrysnow.biome_snow.snowModify": "Snow cover rules",
   "config.merrysnow.biome_snow.snowModify.tooltip": "Per-biome snow cover: \"namespace:biome=true|false\"",
   "config.merrysnow.biome_snow.iceModify": "Ice freeze rules",
-  "config.merrysnow.biome_snow.iceModify.tooltip": "Per-biome ice freeze: \"namespace:biome=true|false\""
+  "config.merrysnow.biome_snow.iceModify.tooltip": "Per-biome ice freeze: \"namespace:biome=true|false\"",
+
+  "config.merrysnow.compat": "Compatibility",
+  "config.merrysnow.compat.sereneSeasonsCompatibility": "Serene Seasons compatibility",
+  "config.merrysnow.compat.sereneSeasonsCompatibility.tooltip": "When enabled, defers to Serene Seasons seasonal logic for precipitation, snow cover, and ice freeze when no explicit override is configured"
 }

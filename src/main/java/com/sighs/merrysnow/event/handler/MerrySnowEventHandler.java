@@ -1,6 +1,7 @@
 package com.sighs.merrysnow.event.handler;
 
 import com.sighs.merrysnow.Config;
+import com.sighs.merrysnow.compat.sereneseasons.SereneSeasonsCompat;
 import com.sighs.merrysnow.event.SpawnEvents;
 import com.sighs.merrysnow.init.Utils;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -29,7 +30,12 @@ public class MerrySnowEventHandler {
             String id = Utils.getBiomeId(level.getLevel(), biome);
             String result = Config.getWeatherModify(id);
             if (result.equals("default")) {
+                // Vanilla check (includes Serene Seasons temperature modifications)
                 isSnowing = biome.coldEnoughToSnow(blockPos, blockPos.getY());
+                // During cold seasons, expand spawn blocking to any biome with precipitation
+                if (!isSnowing && SereneSeasonsCompat.isColdSeason(level.getLevel())) {
+                    isSnowing = biome.hasPrecipitation();
+                }
             } else isSnowing = result.equals("snow");
         } else isSnowing = Boolean.parseBoolean(Config.ENFORCE_SNOW_WEATHER.get());
         boolean isMonster = !category.isFriendly() && !category.isPersistent();

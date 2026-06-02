@@ -18,7 +18,7 @@ public class MerryCommands {
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess, Commands.CommandSelection environment) {
         LiteralArgumentBuilder<CommandSourceStack> BiomeCommand =
                 Commands.literal("biomeid")
-                        .requires(source -> source.hasPermission(0));
+                        .requires(source -> true);
 
         BiomeCommand.then(Commands.literal("current").executes(context -> {
             ServerPlayer player = context.getSource().getPlayer();

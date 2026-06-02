@@ -2,7 +2,7 @@ package com.sighs.merrysnow.init;
 
 import com.sighs.merrysnow.Config;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -35,7 +35,7 @@ public class Utils {
 
     public static String getBiomeId(LevelReader level, Biome biome) {
         try {
-            ResourceLocation rl = level.registryAccess().lookupOrThrow(Registries.BIOME).getKey(biome);
+            Identifier rl = level.registryAccess().lookupOrThrow(Registries.BIOME).getKey(biome);
             return rl.toString();
         } catch (Exception ignored) {
         }

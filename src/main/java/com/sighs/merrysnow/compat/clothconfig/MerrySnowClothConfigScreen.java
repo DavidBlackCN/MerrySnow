@@ -14,6 +14,7 @@ public class MerrySnowClothConfigScreen {
     private static final String TRANSLATE_MERRY_SNOW = "config.merrysnow.merry_snow";
     private static final String TRANSLATE_SUNNY_SNOW = "config.merrysnow.sunny_snow";
     private static final String TRANSLATE_BIOME_SNOW = "config.merrysnow.biome_snow";
+    private static final String TRANSLATE_COMPAT = "config.merrysnow.compat";
 
     public enum TriState {DEFAULT, TRUE, FALSE}
 
@@ -84,6 +85,17 @@ public class MerrySnowClothConfigScreen {
                 .setTooltip(Component.translatable("config.merrysnow.biome_snow.iceModify.tooltip"))
                 .setSaveConsumer(Config.FREEZE_MODIFY::set)
                 .build());
+
+        try {
+            ConfigCategory catCompat = root.getOrCreateCategory(Component.translatable(TRANSLATE_COMPAT));
+            catCompat.addEntry(entry.startBooleanToggle(Component.translatable("config.merrysnow.compat.sereneSeasonsCompatibility"), Config.SERENE_SEASONS_COMPATIBILITY.get())
+                    .setDefaultValue(true)
+                    .setTooltip(Component.translatable("config.merrysnow.compat.sereneSeasonsCompatibility.tooltip"))
+                    .setSaveConsumer(Config.SERENE_SEASONS_COMPATIBILITY::set)
+                    .build());
+        } catch (Exception e) {
+            // Config value may not be available; skip the compat section
+        }
 
         root.setSavingRunnable(() -> {
         });

@@ -1,6 +1,9 @@
 package com.sighs.merrysnow.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.sighs.merrysnow.Config;
+import com.sighs.merrysnow.compat.sereneseasons.SereneSeasonsCompat;
 import com.sighs.merrysnow.init.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -8,7 +11,6 @@ import net.minecraft.world.level.biome.Biome;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = Biome.class)
@@ -31,14 +33,23 @@ public class ClientBiomeMixin {
         }
     }
 
-    @Redirect(method = "getPrecipitationAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/biome/Biome;coldEnoughToSnow(Lnet/minecraft/core/BlockPos;I)Z"))
-    private boolean customSnowWeather(Biome biome, BlockPos blockPos, int i) {
-        if (Config.ENFORCE_SNOW_WEATHER.get().equals("default")) {
-            String id = Utils.getBiomeId(Minecraft.getInstance().level, biome);
-            String result = Config.getWeatherModify(id);
-            if (result.equals("default")) {
-                return biome.coldEnoughToSnow(blockPos, i);
-            } else return result.equals("snow");
-        } else return Boolean.parseBoolean(Config.ENFORCE_SNOW_WEATHER.get());
+    @WrapOperation(method = "getPrecipitationAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/biome/Biome;coldEnoughToSnow(Lnet/minecraft/core/BlockPos;I)Z"))
+    private boolean customSnowWeather(Biome biome, BlockPos blockPos, int i, Operation<Boolean> original) {
+        String enforce = Config.ENFORCE_SNOW_WEATHER.get();
+
+        // Non-default global enforce always wins (explicit user intent)
+        if (!"default".equals(enforce)) {
+            return Boolean.parseBoolean(enforce);
+        }
+
+        // Per-biome overrides always apply
+        String id = Utils.getBiomeId(Minecraft.getInstance().level, biome);
+        String result = Config.getWeatherModify(id);
+        if (!result.equals("default")) {
+            return result.equals("snow");
+        }
+
+        // Default with no override: defer to vanilla (Serene Seasons modifies temperature here)
+        return original.call(biome, blockPos, i);
     }
 }

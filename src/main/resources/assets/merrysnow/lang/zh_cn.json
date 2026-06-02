@@ -34,5 +34,9 @@
   "config.merrysnow.biome_snow.snowModify": "积雪规则",
   "config.merrysnow.biome_snow.snowModify.tooltip": "按群系积雪：\"命名空间:群系=true|false\"",
   "config.merrysnow.biome_snow.iceModify": "结冰规则",
-  "config.merrysnow.biome_snow.iceModify.tooltip": "按群系结冰：\"命名空间:群系=true|false\""
+  "config.merrysnow.biome_snow.iceModify.tooltip": "按群系结冰：\"命名空间:群系=true|false\"",
+
+  "config.merrysnow.compat": "兼容性",
+  "config.merrysnow.compat.sereneSeasonsCompatibility": "静谧四季兼容",
+  "config.merrysnow.compat.sereneSeasonsCompatibility.tooltip": "启用后，在未设置显式覆盖时将遵循静谧四季的季节逻辑（降水、积雪、结冰）"
 }

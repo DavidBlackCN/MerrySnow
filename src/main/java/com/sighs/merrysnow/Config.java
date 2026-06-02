@@ -18,6 +18,7 @@ public class Config {
     public static ModConfigSpec.ConfigValue<String> ENFORCE_SNOW_WEATHER;
     public static ModConfigSpec.ConfigValue<String> ENFORCE_SNOW_COVER;
     public static ModConfigSpec.ConfigValue<String> ENFORCE_ICE_FREEZE;
+    public static ModConfigSpec.ConfigValue<Boolean> SERENE_SEASONS_COMPATIBILITY;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> WEATHER_MODIFY;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> SNOW_MODIFY;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> FREEZE_MODIFY;
@@ -74,6 +75,12 @@ public class Config {
                         List.of(),
                         entry -> entry instanceof String
                 );
+        BUILDER.pop();
+
+        BUILDER.push("Serene Seasons Compatibility");
+        SERENE_SEASONS_COMPATIBILITY = BUILDER
+                .comment("启用后将遵循静谧四季的季节逻辑。需要安装静谧四季。")
+                .define("sereneSeasonsCompatibility", true);
         BUILDER.pop();
 
         SPEC = BUILDER.build();

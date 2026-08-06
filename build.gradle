@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.13.6'
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'maven-publish'
 }
 
@@ -11,7 +11,7 @@ base {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/merrysnow.accesswidener")
+    accessWidenerPath = file("src/main/resources/merrysnow.classtweaker")
 }
 
 repositories {
@@ -19,55 +19,41 @@ repositories {
         name = "Fuzs Mod Resources"
         url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
-    maven {
-        // Add curse maven to repositories
-        name = "Curse Maven"
-        url = "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://maven.terraformersmc.com/releases/" }
+    maven { url = uri("https://maven.shedaniel.me/") }
+    maven { url = uri("https://maven.terraformersmc.com/releases/") }
 }
 
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.fcap_version}"
-    modImplementation "curse.maven:sodium-394468:7207593"
-    modImplementation "curse.maven:irisshaders-455508:7088028"
+    implementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.fcap_version}"
 
-    // fuck loom
-    implementation files("libs/antlr4-runtime-4.13.1.jar")
-    implementation files("libs/glsl-transformer-3.0.0-pre3.jar")
-    implementation files("libs/jcpp-1.4.14.jar")
-
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+    implementation("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    implementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
     inputs.property "loader_version", project.loader_version
-    filteringCharset "UTF-8"
+    inputs.property "fcap_version", project.fcap_version
+    filteringCharset = "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "loader_version": project.loader_version,
+                "fcap_version": project.fcap_version
     }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 25
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
@@ -91,8 +77,8 @@ java {
 }
 
 jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+    from("LICENSE.txt") {
+        rename { "${it}_${project.archives_base_name}" }
     }
 }
 

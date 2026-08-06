@@ -107,10 +107,10 @@ iceModify = ["minecraft:frozen_ocean=false"]
 
 ## 前置依赖
 
-- **Minecraft** 1.21.11
-- **Fabric Loader** 0.18.1+
-- **Fabric API** 0.139.5+
-- **ForgeConfigAPI Port** 21.11.1+
+- **Minecraft** 26.1.2
+- **Fabric Loader** 0.19.3+
+- **Fabric API** 0.155.2+
+- **ForgeConfigAPI Port** 26.1.5+
 
 ### 可选依赖
 
@@ -125,11 +125,11 @@ iceModify = ["minecraft:frozen_ocean=false"]
 ./gradlew build
 ```
 
-输出 JAR 位于 `build/libs/MerrySnow-fabric-1.21.11-1.0.0.jar`。
+输出 JAR 位于 `build/libs/MerrySnow-fabric-26.1.2-1.0.0.jar`。
 
 环境要求：
-- JDK 21+
-- Gradle 8.x（项目已包含 wrapper）
+- JDK 25+
+- Gradle 9.5.1（项目已包含 wrapper）
 
 ## 未来计划
 

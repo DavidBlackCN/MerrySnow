@@ -2,7 +2,7 @@ package com.sighs.merrysnow.init;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.sighs.merrysnow.MerrySnow;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
@@ -16,6 +16,6 @@ public class ModKeybindings {
     );
 
     public static void register() {
-        KeyBindingHelper.registerKeyBinding(CONTROL_KEY);
+        KeyMappingHelper.registerKeyMapping(CONTROL_KEY);
     }
 }

@@ -27,10 +27,11 @@
     "merrysnow.mixins.json"
   ],
   "depends": {
-    "fabricloader": "*",
-    "fabric": "*",
-    "minecraft": "~1.21.11",
-    "forgeconfigapiport": "*"
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=25",
+    "forgeconfigapiport": ">=${fcap_version}"
   },
-  "accessWidener" : "merrysnow.accesswidener"
+  "accessWidener": "merrysnow.classtweaker"
 }

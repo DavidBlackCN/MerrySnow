@@ -29,6 +29,6 @@ public class ConfigAction {
         }
         Config.SUNNY_SNOW.set(value);
         Config.SUNNY_SNOW.save();
-        Minecraft.getInstance().player.displayClientMessage(Component.translatable("message.merrysnow.sunny_snow", String.valueOf(value).substring(0, 3)), true);
+        Minecraft.getInstance().player.sendOverlayMessage(Component.translatable("message.merrysnow.sunny_snow", String.valueOf(value).substring(0, 3)));
     }
 }

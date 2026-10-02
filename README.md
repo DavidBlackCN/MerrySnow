@@ -60,7 +60,7 @@
 
 ## 配置
 
-配置文件位于 `config/merrysnow.toml`（基于 ForgeConfigAPI Port）。可通过 [Mod Menu](https://modrinth.com/mod/modmenu) + [Cloth Config](https://modrinth.com/mod/cloth-config) 打开游戏内 GUI。
+配置文件位于 `config/merrysnow-common.toml`（基于 ForgeConfigAPI Port）。可通过 [Mod Menu](https://modrinth.com/mod/modmenu) + [Cloth Config](https://modrinth.com/mod/cloth-config) 打开游戏内 GUI。
 
 ### 瑞雪功能
 
@@ -107,10 +107,10 @@ iceModify = ["minecraft:frozen_ocean=false"]
 
 ## 前置依赖
 
-- **Minecraft** 26.1.2
-- **Fabric Loader** 0.19.3+
-- **Fabric API** 0.155.2+
-- **ForgeConfigAPI Port** 26.1.5+
+- **Minecraft** 26.3
+- **Fabric Loader** 0.19.5+
+- **Fabric API** 0.161.0+26.3
+- **ForgeConfigAPI Port** 26.3.1+
 
 ### 可选依赖
 
@@ -125,11 +125,11 @@ iceModify = ["minecraft:frozen_ocean=false"]
 ./gradlew build
 ```
 
-输出 JAR 位于 `build/libs/MerrySnow-fabric-26.1.2-1.0.0.jar`。
+输出 JAR 位于 `build/libs/MerrySnow-fabric-26.3-1.0.0.jar`。
 
 环境要求：
 - JDK 25+
-- Gradle 9.5.1（项目已包含 wrapper）
+- Gradle 9.6.0（项目已包含 wrapper）
 
 ## 未来计划
 

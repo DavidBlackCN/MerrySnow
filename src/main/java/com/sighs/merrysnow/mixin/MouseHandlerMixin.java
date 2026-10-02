@@ -36,7 +36,7 @@ public abstract class MouseHandlerMixin {
             method = "onButton",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/Minecraft;getOverlay()Lnet/minecraft/client/gui/screens/Overlay;",
+                    target = "Lnet/minecraft/client/gui/Gui;overlay()Lnet/minecraft/client/gui/screens/Overlay;",
                     ordinal = 0,
                     shift = At.Shift.BEFORE
             ),
